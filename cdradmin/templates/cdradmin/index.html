@@ -1,0 +1,97 @@
+<HTML>
+<HEAD>
+<title>FFA Private Bank - Cdr Admin</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+</HEAD>
+<body style="MARGIN: 0px">
+
+
+<table cellSpacing="0" cellPadding="0" width="779" align="center" border="0" >
+	<TBODY>
+		<tr>
+	
+			<td align="center">
+				<table cellSpacing="0" cellPadding="0" width="779" border="0">
+				<TBODY><br>
+			
+					
+<tr>
+						<td><br>
+							<table cellSpacing="0" cellPadding="0" width="780" bgColor="#f1f1f1" border="0">
+								<tr>
+									<td align="left"><font size="5" color="#04366C"><b>FFA Private Bank sal</b></font>
+									</td>
+
+								</tr>
+								<tr>
+									<td align="right">&nbsp;</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</TBODY>
+
+				</table>
+                        </td>
+		</tr>
+	<tr>
+			<td>
+
+				<table cellSpacing="0" cellPadding="0" border="0" align="center" width="779">
+					<tr>
+						<td align = "center" height="25" width ="200">
+						<div align="center">
+						<FONT color="#ffffff"><MARQUEE bgcolor="#04366C" direction="left" loop="50" width="780" scrolldelay="150">
+						<STRONG>FFA Private Bank Cdr Admin</STRONG></MARQUEE></FONT></DIV>
+						</td>
+
+				</table>
+			</td>
+		</tr>
+
+		<tr>
+			<td height="12">
+			</td>
+		</tr>
+                <tr><td><h4>Superids</h4>
+					{% if superid_list %}
+    						<ul>
+   					 {% for superid in superid_list %}
+					
+    					 <tr> 
+						<td>  <li> Superid: {{ superid.superid }} / {{ superid.name }}
+</td>
+     					{% endfor %}
+  						 </ul>
+					{% else %}
+    					<p>No superids are available.</p>
+					{% endif %}
+
+					</tr>
+
+
+		<tr>
+			<td>
+				<table height="50" cellSpacing="0" cellPadding="0" width="100%" border="0">
+					<tr>
+						<td height="12"  style=" BORDER-top: #ffffff 1px solid; "></td>
+					</tr>
+
+					<tr>
+						<td height="4"  style=" BORDER-top: #ffffff 1px solid; " bgColor="#04366C"></td>
+					</tr>
+					<tr>
+						<td bgColor="#f1f1f1" align ="right"><FONT color="#04366C" size="2">&nbsp;Developed by: Minerva Moawad - 2017&nbsp;</FONT></td>
+					</tr>
+
+				</table>
+			</td>
+		</tr>
+		
+	</TBODY>
+</table>
+
+</body>
+
+</html>
