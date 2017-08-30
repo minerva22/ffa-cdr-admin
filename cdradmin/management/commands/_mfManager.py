@@ -1,13 +1,13 @@
-from ...utils import getenv_or_fail
+
 import pymssql
 
 class MfManager:
   def __init__(self, host: str=None, port: str=None, user: str=None, password: str=None, db:str=None):
-    self.server   = host     or getenv_or_fail("PYMSSQL_SERVER")  #or "localhost"
-    self.port     = port     or getenv_or_fail("PYMSSQL_PORT")    #or "6200"
-    self.user     = user     or getenv_or_fail("PYMSSQL_USERNAME")#or "root"
-    self.password = password or getenv_or_fail("PYMSSQL_PASSWORD")# or ""
-    self.db = db or getenv_or_fail("PYMSSQL_DB")
+    self.server   = host      #or "localhost"
+    self.port     = port        #or "6200"
+    self.user     = user     #or "root"
+    self.password = password # or ""
+    self.db = db 
    
   # get MF names
   # http://pymssql.org/en/stable/pymssql_examples.html
@@ -27,19 +27,21 @@ class MfManager:
     cursor = self._execute("""
       SELECT
         count(*) as n
-      FROM CLIENT
-      where
-       CLI_CLOSED=0
+      FROM CLIENT_superid
+     
     """)
     res = cursor.fetchall()
     return res[0]['n']
 
   def superidsList(self):
     cursor = self._execute("""
-      SELECT CLI_SUPERID, CLI_NOM_PRE
+      SELECT CLI_SUPERID, rtrim(ltrim(CLI_NOM_PRE)) as Main_Holder_Name
         
       FROM CLIENT
+      where cli_ttu_cod=1
+      order by cli_superid asc
     """)
+    return cursor
    
 
   

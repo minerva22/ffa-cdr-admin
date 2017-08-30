@@ -1,5 +1,4 @@
 *sqlite3*
 *.pyc
 importMarketflow.sh
-*table*
-*copy*
+manage.sh

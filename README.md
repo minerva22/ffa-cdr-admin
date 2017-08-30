@@ -1,4 +1,20 @@
 # ffa-cdr-admin
+Django application to support ffa cdr monthly report (ffa-mfe/r-ffa/...)
+
+# Installation
+
+```
+sudo apt-get install freetds-dev
+pew new ffacdradmin
+# for more info about pymssql check ffapb/ffa-blotter requirement.txt
+pip install django progressbar33 git+https://github.com/shadiakiki1986/pymssql.git
+```
+
+# Import marketflow
+
+- copy importMarketflow.sh.dist to importMarketflow.sh and set env vars for database connection
+- copy manage.sh.dist to manage.sh and set debug variable
+- `./importMarketflow.sh --debug`
 
 # Create project
  - Run the following command in command line
