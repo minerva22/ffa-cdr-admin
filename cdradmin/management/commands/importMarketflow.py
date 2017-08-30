@@ -48,7 +48,7 @@ class Command(BaseCommand):
         superidDj, created = Superid.objects.update_or_create(
           superid=superidMf['CLI_SUPERID'],
           defaults={
-            'name': superidMf['CLI_NOM_PRE'],
+            'name': superidMf['Main_Holder_Name'],
           }
         )
         if created:
