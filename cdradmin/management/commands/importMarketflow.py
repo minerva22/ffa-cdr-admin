@@ -53,7 +53,8 @@ class Command(BaseCommand):
           }
         )
         if created:
-          logger.debug("Created superid %s / %s: %s"%(counter, total, superidDj))
+          if options['debug']:
+            logger.debug("Created superid %s / %s: %s"%(counter, total, superidDj))
 
       if options['debug']:
         progress.finish()
