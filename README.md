@@ -64,3 +64,7 @@ pip install django progressbar33 git+https://github.com/pymssql/pymssql.git
 
     . Create folders: management/command/ under the app folder
     . Create files : import_marketflow.py under folder command
+
+
+# LICENSE
+MIT
