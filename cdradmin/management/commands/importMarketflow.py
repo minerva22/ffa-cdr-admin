@@ -42,6 +42,7 @@ class Command(BaseCommand):
         if options['debug']:
           counter+=1
           if counter % 100 == 0:
+            # logger.debug("%s / %s"%(counter,total))
             progress.update(counter)
   
         # get/create entity/row/case
@@ -52,7 +53,7 @@ class Command(BaseCommand):
           }
         )
         if created:
-          logger.debug("Created superid: %s"%superidDj)
+          logger.debug("Created superid %s / %s: %s"%(counter, total, superidDj))
 
       if options['debug']:
         progress.finish()
