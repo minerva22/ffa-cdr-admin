@@ -25,7 +25,7 @@ SECRET_KEY = '3@*kl1&jo=q06mll2&8+*+yu1z+i(r9s9(h86fm@1pfu0z$5!2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["pmo.ffaprivatebank.com"]
 
 
 # Application definition
