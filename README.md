@@ -7,7 +7,7 @@ Django application to support ffa cdr monthly report (ffa-mfe/r-ffa/...)
 sudo apt-get install freetds-dev
 pew new ffacdradmin
 # for more info about pymssql check ffapb/ffa-blotter requirement.txt
-pip install django progressbar33 git+https://github.com/shadiakiki1986/pymssql.git
+pip install django progressbar33 git+https://github.com/pymssql/pymssql.git
 ```
 
 # Import marketflow
