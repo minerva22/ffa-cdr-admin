@@ -55,19 +55,7 @@
 			<td height="12">
 			</td>
 		</tr>
-                <tr><td><ul>
-{% for choice in form.my_choice_field.field.choices %}
-  <li>
-    <input type="radio" name="my_choice_field" value="{{choice.0}}"
-      {% ifequal form.my_choice_field.data choice.0 %} 
-         checked="checked"
-      {% endifequal %}/>
-    <label for="">{{choice.1}}</label>
-  </li>
-{% endfor %}
-</ul>
-
-					</td></tr>
+                
 <tr><td><table border=1>
 <tr><th>superid</th><th>loan</th><th>liability</th></tr>
 {% for x in object_list %}
