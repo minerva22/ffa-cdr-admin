@@ -27,8 +27,8 @@ class MfManager:
     cursor = self._execute("""
       SELECT
         count(*) as n
-      FROM CLIENT_superid
-     
+      FROM CLIENT
+       where cli_ttu_cod=1
     """)
     res = cursor.fetchall()
     return res[0]['n']

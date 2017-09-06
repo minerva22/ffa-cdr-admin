@@ -42,17 +42,19 @@ class Command(BaseCommand):
         if options['debug']:
           counter+=1
           if counter % 100 == 0:
+            # logger.debug("%s / %s"%(counter,total))
             progress.update(counter)
   
         # get/create entity/row/case
         superidDj, created = Superid.objects.update_or_create(
           superid=superidMf['CLI_SUPERID'],
           defaults={
-            'name': superidMf['CLI_NOM_PRE'],
+            'name': superidMf['Main_Holder_Name'],
           }
         )
         if created:
-          logger.debug("Created superid: %s"%superidDj)
+          if options['debug']:
+            logger.debug("Created superid %s / %s: %s"%(counter, total, superidDj))
 
       if options['debug']:
         progress.finish()
