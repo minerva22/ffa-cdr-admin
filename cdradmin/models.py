@@ -10,7 +10,7 @@ class Loan(models.Model):
      long_description = models.CharField(max_length=600)
 
 
-     def __unicode__(self):
+     def __str__(self):
         return self.short_description
 
 class Liability(models.Model):
@@ -18,7 +18,7 @@ class Liability(models.Model):
       short_description = models.CharField(max_length=255)
       long_description = models.CharField(max_length=600)
 
-      def __unicode__(self):
+      def __str__(self):
         return self.short_description
 
 
@@ -29,7 +29,7 @@ class Superid(models.Model):
    
      
      
-     def __unicode__(self):
+     def __str__(self):
         #return str(self.superid)+": "+self.name
         return "%s: %s"%(self.superid, self.name) 
      
@@ -38,10 +38,12 @@ class SuperidToLoanLiability(models.Model):
      superid = models.ForeignKey(Superid)
      loan = models.ForeignKey(Loan)
      liability = models.ForeignKey(Liability)
+     maturity_date = models.DateField()
+     country_of_utilization = models.CharField(max_length=255)
+     ledger =  models.CharField(max_length=255)
      
-     
-     def __unicode__(self):
-        return "%s: %s, %s"%(self.superid, self.loan, self.liability)
+     def __str__(self):
+        return "%s: %s, %s, %s, %s, %s"%(self.superid, self.loan, self.liability, self.maturity_date, self.country_of_utilization,self.ledger)
 
 
 

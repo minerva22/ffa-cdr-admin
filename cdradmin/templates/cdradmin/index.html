@@ -59,7 +59,7 @@
 <tr><td><table border=1>
 <tr><th>superid</th><th>loan</th><th>liability</th></tr>
 {% for x in object_list %}
-<tr><td>{{x.superid}}</td><td>{{x.loan}}</td><td>{{x.liability}}</td></tr>
+<tr><td>{{x.superid}}</td><td>{{x.loan}}</td><td>{{x.liability}}</td><td>{{x.maturity_date}}</td><td>{{x.country_of_utilization}}</td><td>{{x.ledger}}</td> </tr>
 {% endfor %}
 </table></td></tr>
 

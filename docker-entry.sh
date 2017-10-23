@@ -1,4 +1,4 @@
- django server
+ 
 # ATM using the dev built-in server .. will move later to nginx maybe
 
  pew in ffa-cdr-admin python manage.py migrate
