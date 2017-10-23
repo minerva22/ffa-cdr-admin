@@ -10,7 +10,7 @@
 syslogd
 
 # run server
-pew in ffa-cdr-admin  python manage.py runserver 0.0.0.0:8088 | logger -t "runserver" &
+pew in ffa-cdr-admin  python manage.py runserver 0.0.0.0:8009 | logger -t "runserver" &
 
 # wait 1 second for the cron above to send its start output to syslog
 sleep 1
