@@ -73,5 +73,14 @@ x = RCurl::getURL(url)
 library(jsonlite)
 y = jsonlite::fromJSON(x)
 ```
+
+
+# Docker
+ 
+ - Create Dockerfile
+ - Create docker-entry.sh
+ - docker build . -t teamshadi/ffa-cdr-admin:version1
+ - docker run -it -p 8088:8088  teamshadi/ffa-cdr-admin:version1
+
 # LICENSE
 MIT
