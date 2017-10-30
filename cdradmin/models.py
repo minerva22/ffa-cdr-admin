@@ -11,7 +11,7 @@ class Loan(models.Model):
 
 
      def __str__(self):
-        return self.short_description
+        return "%s: %s" %(self.short_description, self.long_description)
 
 class Liability(models.Model):
     
@@ -19,7 +19,7 @@ class Liability(models.Model):
       long_description = models.CharField(max_length=600)
 
       def __str__(self):
-        return self.short_description
+        return "%s: %s" %(self.short_description, self.long_description)
 
 
 class Superid(models.Model):

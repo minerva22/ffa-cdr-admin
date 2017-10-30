@@ -14,7 +14,7 @@
 			<td align="center">
 				<table cellSpacing="0" cellPadding="0" width="779" border="0">
 				<TBODY><br>
-			<tr><td><a  href="https://github.com/ffapb/ffa-cdr-admin" style="text-decoration: none">GitHub Link</a></td>
+			<tr><td><a  href="https://github.com/ffapb/ffa-cdr-admin" style="text-decoration: none">GitHub Link</a>&nbsp; <a  href="{% url 'admin:index' %}" style="text-decoration: none">Admin</a></td>
 					</tr>
 					
 <tr>
@@ -57,7 +57,8 @@
 			</td>
 		</tr>
 <tr><td><table border=1>
-<tr><th>superid</th><th>loan</th><th>liability</th></tr>
+
+<tr><th>superid</th><th>loan</th><th>liability</th><th>Maturity Date</th><th>Country of utilization</th><th>Ledger</th></tr>
 {% for x in object_list %}
 <tr><td>{{x.superid}}</td><td>{{x.loan}}</td><td>{{x.liability}}</td><td>{{x.maturity_date}}</td><td>{{x.country_of_utilization}}</td><td>{{x.ledger}}</td> </tr>
 {% endfor %}
