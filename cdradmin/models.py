@@ -41,12 +41,21 @@ class SuperidToLoanLiability(models.Model):
      guarantee = models.IntegerField(default=0)
      maturity_date = models.DateField(null=True)
      ledger =  models.CharField(max_length=255)
+     country_of_utilization= models.CharField(max_length=255)
      closed = models.BooleanField(default=False)     
-    
-    
-     
+ 
+     if closed == True:
+      self.fields['guarantee'].required = False
+      self.fields['maturity_date'].required= False
+      self.fields['ledger'].required= False
+      self.fields['country_of_utilization'].required= False
+      guarantee = forms.IntegerField(required=False, blank=True, null=True)    
+      ledger = forms.CharField(required=False, blank=True, null=True)
+      country_of_utilization = forms.CharField(required=False, blank=True, null=True)
+      
+
      def __str__(self):
-        return "%s: %s, %s"%(self.superid, self.loan, self.liability, self.guarantee, self.maturity_date, self.country_of_utilization,self.ledger,self.closed)
+        return "%s: %s,%s,%s, %s,%s,%s, %s"%(self.superid, self.loan, self.liability, self.guarantee, self.maturity_date, self.country_of_utilization,self.ledger,self.closed)
 
 
 
