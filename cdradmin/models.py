@@ -38,12 +38,15 @@ class SuperidToLoanLiability(models.Model):
      superid = models.ForeignKey(Superid)
      loan = models.ForeignKey(Loan)
      liability = models.ForeignKey(Liability)
-     maturity_date = models.DateField()
-     country_of_utilization = models.CharField(max_length=255)
+     guarantee = models.IntegerField(default=0)
+     maturity_date = models.DateField(null=True)
      ledger =  models.CharField(max_length=255)
+     closed = models.BooleanField(default=False)     
+    
+    
      
      def __str__(self):
-        return "%s: %s, %s, %s, %s, %s"%(self.superid, self.loan, self.liability, self.maturity_date, self.country_of_utilization,self.ledger)
+        return "%s: %s, %s"%(self.superid, self.loan, self.liability, self.guarantee, self.maturity_date, self.country_of_utilization,self.ledger,self.closed)
 
 
 
