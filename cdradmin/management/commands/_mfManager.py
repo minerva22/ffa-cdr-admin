@@ -45,4 +45,24 @@ class MfManager:
    
 
   
-  
+  def countryCount(self):
+    cursor = self._execute("""
+      SELECT
+          count(*) as n
+      FROM COUNTRY
+    
+    """)
+    res = cursor.fetchall()
+    return res[0]['n']
+
+
+        
+  def countryList(self):
+      cursor = self._execute("""
+        SELECT Ctry_Code, Ctry_Desc1
+        FROM COUNTRY
+        order by Ctry_Code desc
+      """)
+      return cursor
+
+                                          

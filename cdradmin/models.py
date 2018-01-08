@@ -32,6 +32,18 @@ class Superid(models.Model):
      def __str__(self):
         #return str(self.superid)+": "+self.name
         return "%s: %s"%(self.superid, self.name) 
+
+
+class Country(models.Model):
+
+     country = models.IntegerField(default=0)
+     name = models.CharField(max_length=255)
+
+     def __str__(self):
+        
+        return "%s: %s"%(self.country,self.name)
+
+
      
 class SuperidToLoanLiability(models.Model):
      
@@ -41,7 +53,9 @@ class SuperidToLoanLiability(models.Model):
      guarantee = models.IntegerField(default=0)
      maturity_date = models.DateField(null=True)
      ledger =  models.CharField(max_length=255)
-     country_of_utilization= models.CharField(max_length=255)
+     country_of_utilization= models.ForeignKey(Country)
+#     country_of_utilization= models.CharField(max_length=255)
+
      closed = models.BooleanField(default=False)     
  
      if closed == True:
@@ -56,6 +70,7 @@ class SuperidToLoanLiability(models.Model):
 
      def __str__(self):
         return "%s: %s,%s,%s, %s,%s,%s, %s"%(self.superid, self.loan, self.liability, self.guarantee, self.maturity_date, self.country_of_utilization,self.ledger,self.closed)
+         #return "%s: %s,%s,%s, %s,%s, %s"%(self.superid, self.loan, self.liability, self.guarantee, self.maturity_date, self.ledger,self.closed)
 
 
 
