@@ -7,19 +7,19 @@
 <body style="MARGIN: 0px">
 
 
-<table cellSpacing="0" cellPadding="0" width="779" align="center" border="0" >
+<table cellSpacing="0" cellPadding="0"  align="center" border="0" >
 	<TBODY>
 		<tr>
 	
 			<td align="center">
-				<table cellSpacing="0" cellPadding="0" width="779" border="0">
+				<table cellSpacing="0" cellPadding="0"  border="0">
 				<TBODY><br>
 			<tr><td><a  href="https://github.com/ffapb/ffa-cdr-admin" style="text-decoration: none">GitHub Link</a>&nbsp; <a  href="{% url 'admin:index' %}" style="text-decoration: none">Admin</a></td>
 					</tr>
 					
 <tr>
 						<td><br>
-							<table cellSpacing="0" cellPadding="0" width="780" bgColor="#f1f1f1" border="0">
+							<table cellSpacing="0" cellPadding="0"  border="0">
 								<tr>
 									<td align="left"><font size="5" color="#04366C"><b>FFA Private Bank sal</b></font>
 									</td>
@@ -39,11 +39,11 @@
 	<tr>
 			<td>
 
-				<table cellSpacing="0" cellPadding="0" border="0" align="center" width="779">
+				<table cellSpacing="0" cellPadding="0" border="0" align="center">
 					<tr>
-						<td align = "center" height="25" width ="200">
+						<td align = "center" height="25" >
 						<div align="center">
-						<FONT color="#ffffff"><MARQUEE bgcolor="#04366C" direction="left" loop="50" width="780" scrolldelay="150">
+						<FONT color="#ffffff"><MARQUEE bgcolor="#04366C" direction="left" loop="50"  scrolldelay="150">
 						<STRONG>FFA Private Bank Cdr Admin</STRONG></MARQUEE></FONT></DIV>
 						</td>
 
@@ -58,9 +58,9 @@
 		</tr>
 <tr><td><table border=1>
 
-<tr><th>superid</th><th>loan</th><th>liability</th><th>Maturity Date</th><th>Country of utilization</th><th>Ledger</th><th>Closed</th></tr>
+<tr><th>superid</th><th>loan</th><th>liability</th><th>Guarantee</th><th>Maturity Date</th><th>Country of utilization</th><th>Ledger</th><th>Closed</th></tr>
 {% for x in object_list %}
-<tr><td>{{x.superid}}</td><td>{{x.loan}}</td><td>{{x.liability}}</td><td>{{x.maturity_date}}</td><td>{{x.country_of_utilization}}</td><td>{{x.ledger}}</td><td>{{x.closed}}</td> </tr>
+<tr><td>{{x.superid}}</td><td>{{x.loan}}</td><td>{{x.liability}}</td><td>{{x.guarantee}}</td><td>{{x.maturity_date}}</td><td>{{x.country_of_utilization}}</td><td>{{x.ledger}}</td><td>{{x.closed}}</td> </tr>
 {% endfor %}
 </table></td></tr>
 
