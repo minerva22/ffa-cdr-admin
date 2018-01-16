@@ -33,6 +33,12 @@ class Superid(models.Model):
         #return str(self.superid)+": "+self.name
         return "%s: %s"%(self.superid, self.name) 
 
+class Currency(models.Model):
+      code = models.IntegerField(default=0)
+      name = models.CharField(max_length=255)
+     
+      class Meta:
+         ordering = ('name',)
 
 class Country(models.Model):
 
@@ -58,7 +64,7 @@ class SuperidToLoanLiability(models.Model):
      ledger =  models.CharField(max_length=255)
      country_of_utilization= models.ForeignKey(Country)
 #     country_of_utilization= models.CharField(max_length=255)
-
+     currency = models.ForeignKey(Currency)
      closed = models.BooleanField(default=False)     
  
      if closed == True:

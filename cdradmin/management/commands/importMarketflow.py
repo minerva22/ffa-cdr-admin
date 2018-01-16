@@ -4,6 +4,8 @@ from ...models import Liability
 from ...models import Superid
 from ...models import Loan
 from ...models import Country
+from ...models import Currency
+
 # https://docs.djangoproject.com/en/1.10/howto/custom-management-commands/
 from django.core.management.base import BaseCommand
 
@@ -87,6 +89,40 @@ class Command(BaseCommand):
       progress.finish()
 
 
+
+
+
+  def _handle_currency(self, mfMan, options):
+
+   total=mfMan.currencyCount()
+   logger.debug("Django import currencies: %s"%total)
+
+   if options['debug']:
+      counter = 0
+      progress = progressbar.ProgressBar(maxval=total).start()
+
+   for currencyMf in mfMan.currencyList():
+     if options['debug']:
+        counter+=1
+        if counter % 100 == 0:
+            # logger.debug("%s / %s"%(counter,total))
+            progress.update(counter)
+
+       # get/create entity/row/case
+
+        currencyDj, created = Currency.objects.update_or_create(
+          #name=countryMf['Ctry_Desc1'],
+          defaults={
+            'name': currencyMf['DEV_SYM_LGE1'],
+          }
+        )
+        if created:
+            logger.debug("Created currency %s / %s: %s"%(counter, total, currencyDj))
+
+   if options['debug']:
+      progress.finish()
+
+
   def handle(self, *args, **options):
     h1 = logging.StreamHandler(stream=self.stderr)
     logger.addHandler(h1)
@@ -94,6 +130,6 @@ class Command(BaseCommand):
       logger.setLevel(logging.DEBUG)
 
     with MfManager(host=options['host'], port=options['port'], user=options['user'], password=options['password'], db=options['db']) as mfMan:  
-      #self._handle_superid(mfMan, options)
-      self._handle_country(mfMan, options)
-
+     # self._handle_superid(mfMan, options)
+      #self._handle_country(mfMan, options)
+     # self._handle_currency(mfMan, options)

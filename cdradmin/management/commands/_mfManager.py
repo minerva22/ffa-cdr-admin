@@ -65,4 +65,22 @@ class MfManager:
       """)
       return cursor
 
-                                          
+  def currencyCount(self):
+    cursor = self._execute("""
+      SELECT
+        count(*) as n
+      FROM DEVISE
+      
+    """)
+    res = cursor.fetchall()
+    return res[0]['n']
+
+  def currencyList(self):
+    cursor = self._execute("""
+      SELECT DEV_SYM_LGE1
+        
+      FROM DEVISE
+      
+    """)
+    return cursor
+
