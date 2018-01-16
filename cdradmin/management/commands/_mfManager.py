@@ -59,9 +59,9 @@ class MfManager:
         
   def countryList(self):
       cursor = self._execute("""
-        SELECT Ctry_Code, Ctry_Desc1
+        SELECT  Ctry_Desc1
         FROM COUNTRY
-        order by Ctry_Code desc
+        order by Ctry_Desc1 asc
       """)
       return cursor
 

@@ -75,7 +75,7 @@ class Command(BaseCommand):
        # get/create entity/row/case
        
         countryDj, created = Country.objects.update_or_create(
-          country=countryMf['Ctry_Code'],
+         # name=countryMf['Ctry_Desc1'],
           defaults={
             'name': countryMf['Ctry_Desc1'],
           }
