@@ -36,12 +36,14 @@ class Superid(models.Model):
 class Currency(models.Model):
       code = models.IntegerField(default=0)
       name = models.CharField(max_length=255)
+      description = models.CharField(max_length=255)
+
      
 #      class Meta:
  #        ordering = ('name',)
 
       def __str__(self):
-           return " %s"%(self.name)
+           return " %s:%s"%(self.name, self.description)
 
 
 class Country(models.Model):

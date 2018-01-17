@@ -82,6 +82,7 @@ class Command(BaseCommand):
             country=countryMf['Ctry_Code'],
           defaults={
             'name': countryMf['Ctry_Desc1'],
+            
           }
         )
         if created:
@@ -116,6 +117,7 @@ class Command(BaseCommand):
           code = currencyMf['DEV_COD'],
           defaults={
             'name': currencyMf['DEV_SYM_LGE1'],
+            'description': currencyMf['DEV_LIB_LGE1'],
           }
         )
         if created:
@@ -165,5 +167,5 @@ class Command(BaseCommand):
     with MfManager(host=options['host'], port=options['port'], user=options['user'], password=options['password'], db=options['db']) as mfMan:  
      # self._handle_superid(mfMan, options)
       # self._handle_country(mfMan, options)
-      # self._handle_currency(mfMan, options)
-       self._handle_ledger(mfMan, options)
+       self._handle_currency(mfMan, options)
+#       self._handle_ledger(mfMan, options)

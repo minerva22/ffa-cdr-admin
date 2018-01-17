@@ -77,7 +77,7 @@ class MfManager:
 
   def currencyList(self):
     cursor = self._execute("""
-      SELECT DEV_COD,DEV_SYM_LGE1
+      SELECT DEV_COD,DEV_SYM_LGE1, DEV_LIB_LGE1
         
       FROM DEVISE
       
