@@ -8,7 +8,7 @@ class MfManager:
     self.user     = user     #or "root"
     self.password = password # or ""
     self.db = db 
-   
+#    self.db1 = db1   
   # get MF names
   # http://pymssql.org/en/stable/pymssql_examples.html
   def __enter__(self):
@@ -59,7 +59,7 @@ class MfManager:
         
   def countryList(self):
       cursor = self._execute("""
-        SELECT  Ctry_Desc1
+        SELECT Ctry_Code, Ctry_Desc1
         FROM COUNTRY
         order by Ctry_Desc1 asc
       """)
@@ -77,10 +77,33 @@ class MfManager:
 
   def currencyList(self):
     cursor = self._execute("""
-      SELECT DEV_SYM_LGE1
+      SELECT DEV_COD,DEV_SYM_LGE1
         
       FROM DEVISE
       
     """)
     return cursor
+
+  def ledgerCount(self):
+
+    cursor = self._execute("""
+       Use MarketflowAcc
+       SELECT
+          count(*) as n
+          FROM TABL
+                   
+       """)
+    res = cursor.fetchall()
+    return res[0]['n']
+
+
+  def ledgersList(self):
+      cursor = self._execute("""
+        Use MarketflowAcc
+        SELECT TaKey,Tadesc
+                    
+          FROM TABL
+                              
+        """)
+      return cursor
 

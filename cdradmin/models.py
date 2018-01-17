@@ -37,14 +37,19 @@ class Currency(models.Model):
       code = models.IntegerField(default=0)
       name = models.CharField(max_length=255)
      
-      class Meta:
-         ordering = ('name',)
+#      class Meta:
+ #        ordering = ('name',)
+
+      def __str__(self):
+           return " %s"%(self.name)
+
 
 class Country(models.Model):
 
      country = models.IntegerField(default=0)
      name = models.CharField(max_length=255)
      
+   
      class Meta:
        ordering = ('name',)
      
@@ -53,7 +58,20 @@ class Country(models.Model):
         return " %s"%(self.name)
 
 
-     
+class Ledger(models.Model):
+
+     ledger = models.CharField(max_length=255)
+     name = models.CharField(max_length=255)
+
+
+
+     def __str__(self):
+       
+        return "%s: %s"%(self.ledger, self.name)
+   
+
+
+ 
 class SuperidToLoanLiability(models.Model):
      
      superid = models.ForeignKey(Superid)
@@ -65,21 +83,22 @@ class SuperidToLoanLiability(models.Model):
      country_of_utilization= models.ForeignKey(Country)
 #     country_of_utilization= models.CharField(max_length=255)
      currency = models.ForeignKey(Currency)
+   #   currency = models.CharField(max_length=255)
      closed = models.BooleanField(default=False)     
  
      if closed == True:
       self.fields['guarantee'].required = False
       self.fields['maturity_date'].required= False
       self.fields['ledger'].required= False
-      self.fields['country_of_utilization'].required= False
+     # self.fields['country_of_utilization'].required= False
       guarantee = forms.IntegerField(required=False, blank=True, null=True)    
       ledger = forms.CharField(required=False, blank=True, null=True)
       country_of_utilization = forms.CharField(required=False, blank=True, null=True)
       
 
      def __str__(self):
-        return "%s: %s,%s,%s, %s,%s,%s, %s"%(self.superid, self.loan, self.liability, self.guarantee, self.maturity_date, self.country_of_utilization,self.ledger,self.closed)
-         #return "%s: %s,%s,%s, %s,%s, %s"%(self.superid, self.loan, self.liability, self.guarantee, self.maturity_date, self.ledger,self.closed)
+       # return "%s: %s,%s,%s, %s,%s,%s, %s, %s"%(self.superid, self.loan, self.liability, self.guarantee, self.maturity_date, self.country_of_utilization,self.ledger,self.closed)
+         return "%s: %s,%s,%s, %s,%s, %s"%(self.superid, self.loan, self.liability, self.guarantee, self.maturity_date, self.ledger,self.closed)
 
 
 
