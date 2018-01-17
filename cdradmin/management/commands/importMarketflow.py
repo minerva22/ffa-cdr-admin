@@ -50,7 +50,8 @@ class Command(BaseCommand):
         superidDj, created = Superid.objects.update_or_create(
           superid=superidMf['CLI_SUPERID'],
           defaults={
-            'name': superidMf['Main_Holder_Name'],
+            'name': superidMf['CLI_NOM_PRE'],
+
           }
         )
         if created:
@@ -165,7 +166,7 @@ class Command(BaseCommand):
       logger.setLevel(logging.DEBUG)
 
     with MfManager(host=options['host'], port=options['port'], user=options['user'], password=options['password'], db=options['db']) as mfMan:  
-     # self._handle_superid(mfMan, options)
-      # self._handle_country(mfMan, options)
-       self._handle_currency(mfMan, options)
-#       self._handle_ledger(mfMan, options)
+      self._handle_superid(mfMan, options)
+      self._handle_country(mfMan, options)
+      self._handle_currency(mfMan, options)
+      self._handle_ledger(mfMan, options)

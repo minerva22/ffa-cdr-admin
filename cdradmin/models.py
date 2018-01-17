@@ -27,8 +27,11 @@ class Superid(models.Model):
      superid = models.IntegerField(default=0)
      name = models.CharField(max_length=255)
    
-     
-     
+     class Meta:
+          unique_together = ("superid", "name")  
+          
+
+
      def __str__(self):
         #return str(self.superid)+": "+self.name
         return "%s: %s"%(self.superid, self.name) 
@@ -81,7 +84,9 @@ class SuperidToLoanLiability(models.Model):
      liability = models.ForeignKey(Liability)
      guarantee = models.IntegerField(default=0)
      maturity_date = models.DateField(null=True)
-     ledger =  models.CharField(max_length=255)
+#     ledger =  models.ForeignKey(Ledger)
+#     ledger = models.CharField(max_length=255,blank=True)
+     ledger = models.ForeignKey(Ledger)
      country_of_utilization= models.ForeignKey(Country)
 #     country_of_utilization= models.CharField(max_length=255)
      currency = models.ForeignKey(Currency)
@@ -91,16 +96,16 @@ class SuperidToLoanLiability(models.Model):
      if closed == True:
       self.fields['guarantee'].required = False
       self.fields['maturity_date'].required= False
-      self.fields['ledger'].required= False
+    #  self.fields['ledger'].required= False
      # self.fields['country_of_utilization'].required= False
       guarantee = forms.IntegerField(required=False, blank=True, null=True)    
-      ledger = forms.CharField(required=False, blank=True, null=True)
+     # ledger = forms.CharField(required=False, blank=True, null=True)
       country_of_utilization = forms.CharField(required=False, blank=True, null=True)
       
 
      def __str__(self):
        # return "%s: %s,%s,%s, %s,%s,%s, %s, %s"%(self.superid, self.loan, self.liability, self.guarantee, self.maturity_date, self.country_of_utilization,self.ledger,self.closed)
-         return "%s: %s,%s,%s, %s,%s, %s"%(self.superid, self.loan, self.liability, self.guarantee, self.maturity_date, self.ledger,self.closed)
+         return "%s: %s,%s,%s, %s,%s"%(self.superid, self.loan, self.liability, self.guarantee, self.maturity_date,self.closed)
 
 
 
