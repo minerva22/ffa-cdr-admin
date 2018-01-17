@@ -86,10 +86,10 @@ class SuperidToLoanLiability(models.Model):
      maturity_date = models.DateField(null=True)
 #     ledger =  models.ForeignKey(Ledger)
 #     ledger = models.CharField(max_length=255,blank=True)
-     ledger = models.ForeignKey(Ledger)
-     country_of_utilization= models.ForeignKey(Country)
+     ledger = models.ForeignKey(Ledger,blank=True, null=True)
+     country_of_utilization= models.ForeignKey(Country,blank=True, null=True)
 #     country_of_utilization= models.CharField(max_length=255)
-     currency = models.ForeignKey(Currency)
+     currency = models.ForeignKey(Currency,blank=True, null=True)
      #currency = models.CharField(max_length=255)
      closed = models.BooleanField(default=False)     
  
