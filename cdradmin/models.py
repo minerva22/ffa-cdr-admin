@@ -85,7 +85,7 @@ class SuperidToLoanLiability(models.Model):
      country_of_utilization= models.ForeignKey(Country)
 #     country_of_utilization= models.CharField(max_length=255)
      currency = models.ForeignKey(Currency)
-   #   currency = models.CharField(max_length=255)
+     #currency = models.CharField(max_length=255)
      closed = models.BooleanField(default=False)     
  
      if closed == True:
