@@ -107,3 +107,23 @@ class MfManager:
         """)
       return cursor
 
+
+  def currencyguaranteeCount(self):
+    cursor = self._execute("""
+      SELECT
+        count(*) as n
+      FROM DEVISE
+      
+    """)
+    res = cursor.fetchall()
+    return res[0]['n']
+
+  def currencyguaranteeList(self):
+    cursor = self._execute("""
+      SELECT DEV_COD,DEV_SYM_LGE1, DEV_LIB_LGE1
+        
+      FROM DEVISE
+      
+    """)
+    return cursor
+

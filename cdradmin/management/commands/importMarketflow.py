@@ -6,6 +6,9 @@ from ...models import Loan
 from ...models import Country
 from ...models import Currency
 from ...models import Ledger
+from ...models import CurrencyGuarantee
+
+
 
 # https://docs.djangoproject.com/en/1.10/howto/custom-management-commands/
 from django.core.management.base import BaseCommand
@@ -129,6 +132,38 @@ class Command(BaseCommand):
 
 
 
+  def _handle_currencyguarantee(self, mfMan, options):
+
+   total=mfMan.currencyguaranteeCount()
+   logger.debug("Django import currencies guarantee: %s"%total)
+
+   if options['debug']:
+      counter = 0
+      progress = progressbar.ProgressBar(maxval=total).start()
+
+   for currencyguaranteeMf in mfMan.currencyguaranteeList():
+     if options['debug']:
+        counter+=1
+        if counter % 100 == 0:
+            # logger.debug("%s / %s"%(counter,total))
+            progress.update(counter)
+
+       # get/create entity/row/case
+
+        currencyguaranteeDj, created = CurrencyGuarantee.objects.update_or_create(
+          code = currencyguaranteeMf['DEV_COD'],
+          defaults={
+            'name': currencyguaranteeMf['DEV_SYM_LGE1'],
+            'description': currencyguaranteeMf['DEV_LIB_LGE1'],
+          }
+        )
+        if created:
+            logger.debug("Created currency guarantee %s / %s: %s"%(counter, total, currencyguaranteeDj))
+
+   if options['debug']:
+      progress.finish()
+  
+
   def _handle_ledger(self, mfMan, options):
 
    total=mfMan.ledgerCount()
@@ -170,3 +205,4 @@ class Command(BaseCommand):
       self._handle_country(mfMan, options)
       self._handle_currency(mfMan, options)
       self._handle_ledger(mfMan, options)
+      self._handle_currencyguarantee(mfMan, options)
