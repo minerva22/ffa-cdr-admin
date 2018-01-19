@@ -49,6 +49,16 @@ class Currency(models.Model):
            return " %s:%s"%(self.name, self.description)
 
 
+
+class CurrencyGuarantee(models.Model):
+       code =models.IntegerField(default=0)
+       name = models.CharField(max_length=255)
+       description = models.CharField(max_length=255)
+       
+       def __str__(self):
+           return " %s:%s"%(self.name, self.description)
+
+
 class Country(models.Model):
 
      country = models.IntegerField(default=0)
@@ -83,13 +93,12 @@ class SuperidToLoanLiability(models.Model):
      loan = models.ForeignKey(Loan)
      liability = models.ForeignKey(Liability)
      guarantee = models.IntegerField(default=0)
+     guarantee_type = models.CharField(max_length=255)
      maturity_date = models.DateField(blank=True,null=True)
-#     ledger = models.CharField(max_length=255,blank=True)
      ledger = models.ForeignKey(Ledger,blank=True, null=True)
      country_of_utilization= models.ForeignKey(Country,blank=True, null=True)
-#     country_of_utilization= models.CharField(max_length=255)
      currency = models.ForeignKey(Currency,blank=True, null=True)
-     #currency = models.CharField(max_length=255)
+     currency_guarantee = models.ForeignKey(CurrencyGuarantee,blank=True, null=True)
      closed = models.BooleanField(default=False)     
  
 #     if closed == True:
@@ -104,7 +113,7 @@ class SuperidToLoanLiability(models.Model):
 
      def __str__(self):
        # return "%s: %s,%s,%s, %s,%s,%s, %s, %s"%(self.superid, self.loan, self.liability, self.guarantee, self.maturity_date, self.country_of_utilization,self.ledger,self.closed)
-         return "%s: %s,%s,%s,%s,%s,%s,%s,%s"%(self.superid, self.loan, self.liability, self.guarantee,self.ledger, self.maturity_date,self.country_of_utilization,self.currency,self.closed)
+         return "%s: %s,%s,%s,%s,%s,%s,%s,%s,%s,%s"%(self.superid, self.loan, self.liability, self.guarantee,self.guarantee_type,self.ledger, self.maturity_date,self.country_of_utilization,self.currency,self.currency_guarantee,self.closed)
 
 
 
