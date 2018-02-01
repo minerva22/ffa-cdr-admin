@@ -75,12 +75,24 @@ y = jsonlite::fromJSON(x)
 ```
 
 
-# Docker
+## Docker
  
  - Create Dockerfile
  - Create docker-entry.sh
  - docker build . -t teamshadi/ffa-cdr-admin:version1
  - docker run -it -p 8088:8088  teamshadi/ffa-cdr-admin:version1
 
-# LICENSE
+
+## Changelog
+
+Version 0.2 (2017-02-01)
+* add subledger
+* default country of utilization = lebanon
+* docker works
+* add fields from marketflow: currency, country, ledger
+
+Version 0.1 (2017-01-19)
+* working version
+
+## LICENSE
 MIT
