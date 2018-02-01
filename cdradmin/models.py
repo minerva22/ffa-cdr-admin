@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Loan(models.Model):
 
@@ -96,6 +96,7 @@ class SuperidToLoanLiability(models.Model):
      guarantee_type = models.CharField(max_length=255)
      maturity_date = models.DateField(blank=True,null=True)
      ledger = models.ForeignKey(Ledger,blank=True, null=True)
+     subledger = models.IntegerField(default=0, validators = [MinValueValidator(0), MaxValueValidator(9)])
      country_of_utilization= models.ForeignKey(Country,blank=True, null=True)
      currency = models.ForeignKey(Currency,blank=True, null=True)
      currency_guarantee = models.ForeignKey(CurrencyGuarantee,blank=True, null=True)
@@ -116,4 +117,9 @@ class SuperidToLoanLiability(models.Model):
          return "%s: %s,%s,%s,%s,%s,%s,%s,%s,%s,%s"%(self.superid, self.loan, self.liability, self.guarantee,self.guarantee_type,self.ledger, self.maturity_date,self.country_of_utilization,self.currency,self.currency_guarantee,self.closed)
 
 
+     def save(self,*args, **kwargs):
+       lebanon = Country.objects.get(name__iexact='lebanon')
+       if self.country_of_utilization is None:
+         self.country_of_utilization = lebanon
 
+       return super().save(*args, **kwargs)
