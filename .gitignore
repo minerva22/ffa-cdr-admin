@@ -3,3 +3,4 @@
 importMarketflow.sh
 manage.sh
 *.swp
+*json
