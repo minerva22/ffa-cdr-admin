@@ -95,7 +95,7 @@ class SuperidToLoanLiability(models.Model):
      guarantee = models.IntegerField(default=0)
      guarantee_type = models.CharField(max_length=255)
      maturity_date = models.DateField(blank=True,null=True)
-     ledger = models.ForeignKey(Ledger,blank=True, null=True)
+     ledger = models.ForeignKey(Ledger)
      subledger = models.IntegerField(default=0, validators = [MinValueValidator(0), MaxValueValidator(9)])
      country_of_utilization= models.ForeignKey(Country,blank=True, null=True)
      currency = models.ForeignKey(Currency,blank=True, null=True)

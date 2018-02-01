@@ -101,9 +101,8 @@ class MfManager:
       cursor = self._execute("""
         Use MarketflowAcc
         SELECT TaKey,Tadesc
-                    
           FROM TABL
-                              
+          where len(TaKey)=4
         """)
       return cursor
 

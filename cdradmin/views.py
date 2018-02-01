@@ -30,5 +30,12 @@ class IndexView( generic.ListView):
         #to get the id of foreignkey
         #data = SuperidToLoanLiability.objects.all().values('superid', 'loan', 'liability')
         #data = SuperidToLoanLiability.objects.all()[0]
-        json_obj = [{"superid": x.superid.superid,"loan_type": x.loan.short_description, "liability_type": x.liability.short_description, "ledger": x.ledger} for x in SuperidToLoanLiability.objects.all()]
+        json_obj = [
+          {
+            "superid": x.superid.superid,
+            "loan_type": x.loan.short_description,
+            "liability_type": x.liability.short_description,
+            "ledger": x.ledger.ledger
+          } for x in SuperidToLoanLiability.objects.all()
+        ]
         return JsonResponse(json_obj ,safe=False)
