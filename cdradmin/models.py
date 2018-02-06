@@ -91,6 +91,7 @@ class SuperidToLoanLiability(models.Model):
      
      superid = models.ForeignKey(Superid)
      loan = models.ForeignKey(Loan)
+     loan_amount = models.IntegerField(default=0)
      liability = models.ForeignKey(Liability)
      guarantee = models.IntegerField(default=0)
      guarantee_type = models.CharField(max_length=255)
@@ -114,7 +115,7 @@ class SuperidToLoanLiability(models.Model):
 
      def __str__(self):
        # return "%s: %s,%s,%s, %s,%s,%s, %s, %s"%(self.superid, self.loan, self.liability, self.guarantee, self.maturity_date, self.country_of_utilization,self.ledger,self.closed)
-         return "%s: %s,%s,%s,%s,%s,%s,%s,%s,%s,%s"%(self.superid, self.loan, self.liability, self.guarantee,self.guarantee_type,self.ledger, self.maturity_date,self.country_of_utilization,self.currency,self.currency_guarantee,self.closed)
+         return "%s: %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s"%(self.superid, self.loan,self.loan_amount, self.liability, self.guarantee,self.guarantee_type,self.ledger, self.maturity_date,self.country_of_utilization,self.currency,self.currency_guarantee,self.closed)
 
 
      def save(self,*args, **kwargs):
