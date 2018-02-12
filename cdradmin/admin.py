@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Superid, Loan, Liability, SuperidToLoanLiability, Country,Currency, Ledger,CurrencyGuarantee
+from .models import Superid, Loan, Liability, SuperidToLoanLiability, Country,Currency, Ledger
 
 
 
@@ -10,6 +10,6 @@ admin.site.register(Loan,admin.ModelAdmin)
 admin.site.register(Country,admin.ModelAdmin)
 admin.site.register(Currency,admin.ModelAdmin)
 admin.site.register(Ledger,admin.ModelAdmin)
-admin.site.register(CurrencyGuarantee,admin.ModelAdmin)
+
 
 admin.site.register(SuperidToLoanLiability,admin.ModelAdmin)

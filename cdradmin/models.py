@@ -50,15 +50,6 @@ class Currency(models.Model):
 
 
 
-class CurrencyGuarantee(models.Model):
-       code =models.IntegerField(default=0)
-       name = models.CharField(max_length=255)
-       description = models.CharField(max_length=255)
-       
-       def __str__(self):
-           return " %s:%s"%(self.name, self.description)
-
-
 class Country(models.Model):
 
      country = models.IntegerField(default=0)
@@ -90,17 +81,17 @@ class Ledger(models.Model):
 class SuperidToLoanLiability(models.Model):
      
      superid = models.ForeignKey(Superid)
-     loan = models.ForeignKey(Loan)
+     loan_type = models.ForeignKey(Loan)
      loan_amount = models.IntegerField(default=0)
-     liability = models.ForeignKey(Liability)
-     guarantee = models.IntegerField(default=0)
+     liability_type = models.ForeignKey(Liability)
+     guarantee_amount = models.IntegerField(default=0)
      guarantee_type = models.CharField(max_length=255)
      maturity_date = models.DateField(blank=True,null=True)
      ledger = models.ForeignKey(Ledger)
      subledger = models.IntegerField(default=0, validators = [MinValueValidator(0), MaxValueValidator(9)])
      country_of_utilization= models.ForeignKey(Country,blank=True, null=True)
-     currency = models.ForeignKey(Currency,blank=True, null=True)
-     currency_guarantee = models.ForeignKey(CurrencyGuarantee,blank=True, null=True)
+     currency_liability = models.ForeignKey(Currency,blank=True, null=True, related_name='currency_liability')
+     guarantee_currency = models.ForeignKey(Currency,blank=True, null=True,related_name='guarantee_currency')
      closed = models.BooleanField(default=False)     
  
 #     if closed == True:
@@ -114,8 +105,8 @@ class SuperidToLoanLiability(models.Model):
       
 
      def __str__(self):
-       # return "%s: %s,%s,%s, %s,%s,%s, %s, %s"%(self.superid, self.loan, self.liability, self.guarantee, self.maturity_date, self.country_of_utilization,self.ledger,self.closed)
-         return "%s: %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s"%(self.superid, self.loan,self.loan_amount, self.liability, self.guarantee,self.guarantee_type,self.ledger, self.maturity_date,self.country_of_utilization,self.currency,self.currency_guarantee,self.closed)
+       # return "%s: %s,%s,%s, %s,%s,%s, %s, %s"%(self.superid, self.loan_type, self.liability_type, self.guarantee_amount, self.maturity_date, self.country_of_utilization,self.ledger,self.closed)
+         return "%s: %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s"%(self.superid, self.loan_type,self.loan_amount, self.liability_type, self.guarantee_amount,self.guarantee_type,self.ledger, self.maturity_date,self.country_of_utilization,self.currency_liability,self.guarantee_currency,self.closed)
 
 
      def save(self,*args, **kwargs):
