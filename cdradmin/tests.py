@@ -57,3 +57,8 @@ class CurrencyTestCase(TestCase):
         )
        
         self.assertEqual(Sup.closed,'1')
+
+        def test_asjson(self):
+             url = reverse('cdradmin:index')
+             response = self.client.get(url)
+             self.assertEqual(response.status_code, 200)
