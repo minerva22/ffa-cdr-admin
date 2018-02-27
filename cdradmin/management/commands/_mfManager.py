@@ -106,7 +106,25 @@ class MfManager:
         """)
       return cursor
 
+  def entityCount(self):
+    cursor = self._execute("""
+      Use MArketflow
+      SELECT
+        count(*) as n
+      FROM CLIENT_ENTITY
 
+    """)
+    res = cursor.fetchall()
+    return res[0]['n']
 
+  def entityList(self):
+    cursor = self._execute("""
+      Use Marketflow
+      SELECT ENT_COD, ENT_FULL_NAME       
+      FROM CLIENT_ENTITY
+      
+      order by ENT_COD asc
+    """)
+    return cursor
 
 

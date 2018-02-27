@@ -15,9 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-
+from django.views.generic import TemplateView
+#from django.views.generic import EntityListView
 urlpatterns = [
     url(r'^cdradmin/', include('cdradmin.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^cdradmin/entitytype/', include('cdradmin.urls')),
+#    url(r'^$', views.EntityListView.as_view(), name='entity_partnertype'),
+
 ]
 

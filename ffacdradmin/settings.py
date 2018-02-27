@@ -69,7 +69,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ffacdradmin.wsgi.application'
-
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases

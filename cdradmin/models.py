@@ -48,15 +48,19 @@ class Partner_type(models.Model):
 class Entity(models.Model):
       entity_id = models.IntegerField(default=0)
       name = models.CharField(max_length=255) 
-      partner_type = models.ForeignKey(Partner_type)   
+   
     
       def __str__(self):
      
           return "%s: %s"%(self.entity_id, self.name)
 
+class EntityToPartnerType(models.Model):
+      entity = models.ForeignKey(Entity)
+      partner_type = models.ForeignKey(Partner_type)
 
+      def __str__(self):
 
-
+          return "%s: %s"%(self.entity, self.partner_type)
 
 class Currency(models.Model):
       code = models.IntegerField(default=0)
