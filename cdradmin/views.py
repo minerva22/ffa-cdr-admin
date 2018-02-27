@@ -65,24 +65,29 @@ class EntityListView(ListView):
          asjson=asjson.lower()=="true"
 
          if not asjson:
-            return super().get(*args, **kwargs)
+            return super(EntityListView, self).get(*args, **kwargs)
 
 
          json_obj = [
            {
-            "entity": y.entity
-         #   "partner_type": y.partner_type
+            "entity": y.entity.entity_id,
+            "partner_type": y.partner_type.name
             
           
             } for y in EntityToPartnerType.objects.all()
          ]
-         return JsonResponse(json_obj,safe=False)
-#         return HttpResponse(json.simplejson.dumps(json_obj), mimetype="application/json")
-   
-   #      return HttpResponse(data, content_type="application/json") 
 
-         #context['entity'] = ([x.entity for x in context['object_list']]);
-         #context['partner_type'] = ([x.partner_type for x in context['object_list']]);
+  
+
+         #data = [{"entity": y.entity.entity_id, "partner_type":y.partner_type.name} for y in EntityToPartnerType.objects.all()]
+
+
+         #json_json=serializers.serialize('json',json_obj,fields=('entity','partner_type'))
+         #return HttpResponse(json_json, content_type="application/json")
+         return JsonResponse(json_obj, safe=False)
+    
+
+
         
          
                               
