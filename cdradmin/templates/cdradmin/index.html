@@ -67,9 +67,35 @@
 		</tr>
 <tr><td><table border=1>
 
-<tr><th>superid</th><th>loan</th><th>Loan amount</th><th>liability</th><th>Guarantee Type</th><th>Guarantee</th><th>Currency Guarantee</th><th>Maturity Date</th><th>Country of utilization</th><th>Ledger</th><th>Currency Liability</th><th>Closed</th></tr>
+<tr>
+  <th>superid</th>
+  <th>loan</th>
+  <th>Loan amount</th>
+  <th>liability</th>
+  <th>Guarantee Type</th>
+  <th>Guarantee</th>
+  <th>Currency Guarantee</th>
+  <th>Maturity Date</th>
+  <th>Country of utilization</th>
+  <th>Ledger</th>
+  <th>Currency Liability</th>
+  <th>Closed</th>
+</tr>
 {% for x in object_list %}
-<tr><td>{{x.superid}}</td><td>{{x.loan_type}}</td><td>{{x.loan_amount}}</td><td>{{x.liability_type}}</td><td>{{x.guarantee_type}}</td><td>{{x.guarantee_amount}}</td><td>{{x.guarantee_currency}}</td><td>{{x.maturity_date}}</td><td>{{x.country_of_utilization}}</td><td>{{x.ledger}}</td><td>{{x.currency_liability}}</td><td>{{x.entity_code}}</td><td></td><td>{{x.closed}}</td> </tr>
+<tr>
+  <td>{{x.superid}}</td>
+  <td>{{x.loan_type}}</td>
+  <td>{{x.loan_amount}}</td>
+  <td>{{x.liability_type}}</td>
+  <td>{{x.guarantee_type}}</td>
+  <td>{{x.guarantee_amount}}</td>
+  <td>{{x.guarantee_currency}}</td>
+  <td>{{x.maturity_date}}</td>
+  <td>{{x.country_of_utilization}}</td>
+  <td>{{x.ledger}}</td>
+  <td>{{x.currency_liability}}</td>
+  <td>{{x.closed}}</td>
+</tr>
 {% endfor %}
 </table></td></tr>
 
