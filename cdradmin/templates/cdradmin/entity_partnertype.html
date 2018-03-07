@@ -14,7 +14,15 @@
 			<td align="center">
 				<table cellSpacing="0" cellPadding="0"  border="0">
 				<TBODY><br>
-            <tr><td><a  href="https://github.com/ffapb/ffa-cdr-admin" style="text-decoration: none">GitHub Link | </a>&nbsp; <a  href="{% url 'admin:index' %}" style="text-decoration: none">Admin | </a><a  href="/cdradmin" style="text-decoration: none">Superid To Loan Liablity | </a>&nbsp; <a  href="/entity_partnertype" style="text-decoration: none">Entity To Partner Type </a></td>
+            <tr>
+              <td>
+                <a  href="https://github.com/ffapb/ffa-cdr-admin" style="text-decoration: none">GitHub Link | </a>
+                &nbsp;
+                <a  href="{% url 'admin:index' %}" style="text-decoration: none">Admin | </a>
+                <a  href="{% url 'cdradmin:index' %}" style="text-decoration: none">Superid To Loan Liablity | </a>
+                &nbsp;
+                <a  href="{% url 'cdradmin:entity_partnertype' %}" style="text-decoration: none">Entity To Partner Type </a>
+              </td>
             </tr>
                       					
 <tr>
