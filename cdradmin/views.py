@@ -43,6 +43,7 @@ class IndexView( generic.ListView):
             "loan_amount": x.loan_amount,
             "loan_currency": x.currency_liability.name if x.currency_liability is not None else None,
             "liability_type": x.liability_type.short_description,
+            "subledger": x.subledger,
             "ledger": x.ledger.ledger
           } for x in SuperidToLoanLiability.objects.all()
         ]
