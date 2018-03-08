@@ -40,6 +40,8 @@ class IndexView( generic.ListView):
           {
             "superid": x.superid.superid,
             "loan_type": x.loan_type.short_description,
+            "loan_amount": x.loan_amount,
+            "loan_currency": x.currency_liability.code,
             "liability_type": x.liability_type.short_description,
             "ledger": x.ledger.ledger
           } for x in SuperidToLoanLiability.objects.all()
