@@ -39,12 +39,18 @@ class IndexView( generic.ListView):
         json_obj = [
           {
             "superid": x.superid.superid,
+            "ledger": x.ledger.ledger,
+            "subledger": x.subledger,
+
+            "liability_type": x.liability_type.short_description,
+
             "loan_type": x.loan_type.short_description,
             "loan_amount": x.loan_amount,
             "loan_currency": x.currency_liability.name if x.currency_liability is not None else None,
-            "liability_type": x.liability_type.short_description,
-            "subledger": x.subledger,
-            "ledger": x.ledger.ledger
+
+            "guarantee_type": x.guarantee_type,
+            "guarantee_amount": x.guarantee_amount,
+            "guarantee_currency": x.guarantee_currency.name if x.guarantee_currency is not None else None,
           } for x in SuperidToLoanLiability.objects.all()
         ]
         return JsonResponse(json_obj ,safe=False)
