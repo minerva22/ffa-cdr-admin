@@ -99,7 +99,7 @@
   <td>{{x.currency_liability}}</td>
   <td>
     {% if x.guarantee_for %}
-      {{x.guarantee_for.superid}} / {{x.guarantee_for.ledger}} / {{x.guarantee_for.subledger}} / {{x.guarantee_for.currency_liability.name}}
+      {{x.guarantee_for.superid.superid}} / {{x.guarantee_for.ledger.ledger}} / {{x.guarantee_for.subledger}} / {{x.guarantee_for.currency_liability.name}}
     {% endif %}
   </td>
   <td>{{x.closed}}</td>

@@ -14,19 +14,28 @@ def forwards_func(apps, schema_editor):
     # We get the model from the versioned app registry;
     # if we directly import it, it'll be the wrong version
     SuperidToLoanLiability = apps.get_model("cdradmin", "SuperidToLoanLiability")
+    Liability = apps.get_model("cdradmin", "Liability")
     db_alias = schema_editor.connection.alias
     to_create = []
-    for stll in SuperidToLoanLiability.exclude(guarantee_amount=0):
+    for stll in SuperidToLoanLiability.objects.exclude(guarantee_amount=0):
+      try:
+        guarantee_type = Liability.objects.get(short_description=stll.guarantee_type)
+      except:
+        print("liability_type %s not found?"%stll.guarantee_type)
+        print(Liability.objects.all().values_list('short_description', flat=True))
+        # guarantee_type = Liability.objects.create(short_description=stll.guarantee_type, long_description=stll.guarantee_type)
+        raise
+
       to_create.append(SuperidToLoanLiability(
         superid = stll.superid,
         loan_type = stll.loan_type, # e.g. Z3
         loan_amount = stll.guarantee_amount,
-        liability_type = stll.guarantee_type, # e.g. ACB / TCB
+        liability_type = guarantee_type, # e.g. ACB / TCB
         guarantee_amount = 0,
         guarantee_type = '',
         maturity_date = stll.maturity_date,
-        ledger = stll.Ledger,
-        subledger = stll.subledger,
+        ledger = stll.ledger,
+        subledger = 7+stll.subledger,
         country_of_utilization = stll.country_of_utilization,
         currency_liability = stll.guarantee_currency,
         guarantee_currency = None,
