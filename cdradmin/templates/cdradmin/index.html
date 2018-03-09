@@ -1,3 +1,5 @@
+{% load humanize %}
+:w
 <HTML>
 <HEAD>
 <title>FFA Private Bank - Cdr Admin</title>
@@ -69,35 +71,40 @@
 
 <tr>
   <th>superid</th>
-  <th>loan</th>
-  <th>Loan amount</th>
-  <th>liability</th>
-  <th><strike>Guarantee Type</strike></th>
-  <th><strike>Guarantee</strike></th>
-  <th><strike>Currency Guarantee</strike></th>
-  <th>Maturity Date</th>
-  <th>Country of utilization</th>
   <th>Ledger</th>
   <th>Subledger</th>
   <th>Currency Liability</th>
+
+  <th>Loan type</th>
+  <th>Liability type</th>
+  <th>Loan amount</th>
+
+  <th><strike>Guarantee Type</strike></th>
+  <th><strike>Guarantee amount</strike></th>
+  <th><strike>Guarantee Currency</strike></th>
+  <th>Maturity Date</th>
+  <th>Country of utilization</th>
   <th>Guarantee for</th>
   <th>Closed</th>
 </tr>
 {% for x in object_list %}
-<tr>
+<tr {% if x.closed %} bgcolor="grey" {% endif %}>
   <td>{{x.superid}}</td>
-  <td>{{x.loan_type}}</td>
-  <td>{{x.loan_amount}}</td>
-  <td>{{x.liability_type}}</td>
-  <td><strike>{{x.guarantee_type}}</strike></td>
-  <td><strike>{{x.guarantee_amount}}</strike></td>
-  <td><strike>{{x.guarantee_currency}}</strike></td>
-  <td>{{x.maturity_date}}</td>
-  <td>{{x.country_of_utilization}}</td>
-  <td>{{x.ledger}}</td>
+  <td title="{{x.ledger.name}}">{{x.ledger.ledger}}</td>
   <td>{{x.subledger}}</td>
-  <td>{{x.currency_liability}}</td>
-  <td>
+  <td>{{x.currency_liability.name}}</td>
+
+  <td title="{{x.loan_type.long_description}}">{{x.loan_type.short_description}}</td>
+
+  <td title="{{x.liability_type.long_description}}">{{x.liability_type.short_description}}</td>
+  <td>{{x.loan_amount|intcomma}}</td>
+
+  <td><strike>{{x.guarantee_type}}</strike></td>
+  <td><strike>{{x.guarantee_amount|intcomma}}</strike></td>
+  <td><strike>{{x.guarantee_currency.name}}</strike></td>
+  <td>{{x.maturity_date|date:"Y-m-d"}}</td>
+  <td>{{x.country_of_utilization}}</td>
+  <td nowrap>
     {% if x.guarantee_for %}
       {{x.guarantee_for.superid.superid}} / {{x.guarantee_for.ledger.ledger}} / {{x.guarantee_for.subledger}} / {{x.guarantee_for.currency_liability.name}}
     {% endif %}
