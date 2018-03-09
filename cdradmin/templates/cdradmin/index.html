@@ -72,13 +72,15 @@
   <th>loan</th>
   <th>Loan amount</th>
   <th>liability</th>
-  <th>Guarantee Type</th>
-  <th>Guarantee</th>
-  <th>Currency Guarantee</th>
+  <th><strike>Guarantee Type</strike></th>
+  <th><strike>Guarantee</strike></th>
+  <th><strike>Currency Guarantee</strike></th>
   <th>Maturity Date</th>
   <th>Country of utilization</th>
   <th>Ledger</th>
+  <th>Subledger</th>
   <th>Currency Liability</th>
+  <th>Guarantee for</th>
   <th>Closed</th>
 </tr>
 {% for x in object_list %}
@@ -87,13 +89,19 @@
   <td>{{x.loan_type}}</td>
   <td>{{x.loan_amount}}</td>
   <td>{{x.liability_type}}</td>
-  <td>{{x.guarantee_type}}</td>
-  <td>{{x.guarantee_amount}}</td>
-  <td>{{x.guarantee_currency}}</td>
+  <td><strike>{{x.guarantee_type}}</strike></td>
+  <td><strike>{{x.guarantee_amount}}</strike></td>
+  <td><strike>{{x.guarantee_currency}}</strike></td>
   <td>{{x.maturity_date}}</td>
   <td>{{x.country_of_utilization}}</td>
   <td>{{x.ledger}}</td>
+  <td>{{x.subledger}}</td>
   <td>{{x.currency_liability}}</td>
+  <td>
+    {% if x.guarantee_for %}
+      {{x.guarantee_for.superid}} / {{x.guarantee_for.ledger}} / {{x.guarantee_for.subledger}} / {{x.guarantee_for.currency_liability.name}}
+    {% endif %}
+  </td>
   <td>{{x.closed}}</td>
 </tr>
 {% endfor %}
