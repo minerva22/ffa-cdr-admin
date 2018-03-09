@@ -116,7 +116,7 @@ class SuperidToLoanLiability(models.Model):
      guarantee_amount = models.IntegerField(default=0)
 
      #: deprecated
-     guarantee_type = models.CharField(max_length=255)
+     guarantee_type = models.CharField(max_length=255, blank=True)
 
      #: Instead of setting "guarantee_..." fields which are now deprecated,
      #: just point a liability to another one as the guarantee for which it is
