@@ -115,7 +115,7 @@ class SuperidToLoanLiability(models.Model):
      superid = models.ForeignKey(Superid)
 
      loan_type = models.ForeignKey(Loan)
-     loan_amount = models.IntegerField(default=0)
+     loan_amount = models.IntegerField(default=0, verbose_name="Loan amount (use 0 for 'From MF')")
      liability_type = models.ForeignKey(Liability)
 
      #: Instead of setting "guarantee_..." fields which are now deprecated,
@@ -125,7 +125,7 @@ class SuperidToLoanLiability(models.Model):
      maturity_date = models.DateField(blank=True,null=True)
 
      #: Ledger can be NULL for TSR/TBI only
-     ledger = models.ForeignKey(Ledger, blank=True, null=True, default=None)
+     ledger = models.ForeignKey(Ledger, blank=True, null=True, default=None, verbose_name="Ledger (skip for TSR/TBI)")
 
      #: Single digit from 0 to 9
      subledger = models.IntegerField(default=0, validators = [MinValueValidator(0), MaxValueValidator(9)])

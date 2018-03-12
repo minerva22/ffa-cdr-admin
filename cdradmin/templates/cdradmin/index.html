@@ -94,7 +94,7 @@
   <td title="{{x.loan_type.long_description}}">{{x.loan_type.short_description}}</td>
 
   <td title="{{x.liability_type.long_description}}">{{x.liability_type.short_description}}</td>
-  <td>{{x.loan_amount|intcomma}}</td>
+  <td>{% if x.loan_amount == 0 %}From MF{% else %}{{x.loan_amount|intcomma}}{% endif %}</td>
 
   <td {% if x.get_remaining_period < 0 %}style="color:red"{% endif %}>
     {% if x.maturity_date %}
