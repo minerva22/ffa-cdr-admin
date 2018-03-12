@@ -29,6 +29,7 @@ class Superid(models.Model):
   
      class Meta:
           unique_together = ("superid", "account")  
+          ordering = ("superid", "account")
 
      def __str__(self):
         #return str(self.superid)+": "+self.name
