@@ -117,11 +117,15 @@ class SuperidToLoanLiability(models.Model):
      guarantee_for = models.ForeignKey('SuperidToLoanLiability', blank=True, null=True, default=None)
 
      maturity_date = models.DateField(blank=True,null=True)
+
+     #: Ledger can be NULL for TSR/TBI only
      ledger = models.ForeignKey(Ledger, blank=True, null=True, default=None)
+
+     #: Single digit from 0 to 9
      subledger = models.IntegerField(default=0, validators = [MinValueValidator(0), MaxValueValidator(9)])
 
      country_of_utilization= models.ForeignKey(Country,blank=True, null=True)
-     currency_liability = models.ForeignKey(Currency,blank=True, null=True, related_name='currency_liability')
+     currency_liability = models.ForeignKey(Currency, related_name='currency_liability')
 
      closed = models.BooleanField(default=False)     
  
@@ -151,8 +155,7 @@ class SuperidToLoanLiability(models.Model):
         ordering = ['superid__superid', 'ledger__ledger', 'subledger', 'currency_liability']
 
      def __str__(self):
-       # return "%s: %s,%s,%s, %s,%s,%s, %s, %s"%(self.superid, self.loan_type, self.liability_type, self.maturity_date, self.country_of_utilization,self.ledger,self.closed)
-         return "%s: %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s"%(self.superid, self.loan_type,self.loan_amount, self.liability_type, self.ledger, self.maturity_date,self.country_of_utilization,self.currency_liability,self.closed)
+         return "%s: %s, %s, %s"%(self.superid, self.display_ledger_text(), self.subledger, self.currency_liability)
 
 
      def save(self,*args, **kwargs):
