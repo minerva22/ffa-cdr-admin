@@ -138,6 +138,8 @@ class SuperidToLoanLiability(models.Model):
      # ledger = forms.CharField(required=False, blank=True, null=True)
     #  country_of_utilization = forms.CharField(required=False, blank=True, null=True)
       
+     comments = models.CharField(max_length=600, blank=True)
+
 
      def clean(self,*args, **kwargs):
        if self.liability_type.short_description in ['TSR','TBI']:

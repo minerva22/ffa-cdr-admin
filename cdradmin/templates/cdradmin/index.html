@@ -82,6 +82,7 @@
   <th>Country of utilization</th>
   <th>Guarantee for</th>
   <th>Closed</th>
+  <th>Comments</th>
 </tr>
 {% for x in object_list %}
 <tr {% if x.closed %} bgcolor="grey" {% endif %}>
@@ -103,6 +104,7 @@
     {% endif %}
   </td>
   <td>{{x.closed}}</td>
+  <td>{{x.comments}}</td>
 </tr>
 {% endfor %}
 </table></td></tr>
