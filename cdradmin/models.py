@@ -77,17 +77,13 @@ class Currency(models.Model):
 
 
 class Country(models.Model):
-
-     country = models.IntegerField(default=0)
+     cdr_code = models.IntegerField(default=0)
      name = models.CharField(max_length=255)
-     
-   
      class Meta:
        ordering = ('name',)
      
      def __str__(self):
-        
-        return " %s"%(self.name)
+        return "%s (%s)"%(self.name, self.cdr_code)
 
 
 class Ledger(models.Model):
@@ -135,15 +131,6 @@ class SuperidToLoanLiability(models.Model):
 
      closed = models.BooleanField(default=False)     
  
-#     if closed == True:
- #     self.fields['guarantee'].required = False
-  #    self.fields['maturity_date'].required= False
-    #  self.fields['ledger'].required= False
-     # self.fields['country_of_utilization'].required= False
-   #   guarantee = forms.IntegerField(required=False, blank=True, null=True)    
-     # ledger = forms.CharField(required=False, blank=True, null=True)
-    #  country_of_utilization = forms.CharField(required=False, blank=True, null=True)
-      
      comments = models.CharField(max_length=600, blank=True)
 
 
@@ -167,9 +154,9 @@ class SuperidToLoanLiability(models.Model):
 
 
      def save(self,*args, **kwargs):
-       lebanon = Country.objects.get(name__iexact='lebanon')
+       beirut = Country.objects.get(name__iexact='beirut')
        if self.country_of_utilization is None:
-         self.country_of_utilization = lebanon
+         self.country_of_utilization = beirut
 
        return super().save(*args, **kwargs)
 

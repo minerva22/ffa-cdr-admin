@@ -3,7 +3,6 @@ from ._mfManager import MfManager
 from ...models import Liability
 from ...models import Superid
 from ...models import Loan
-from ...models import Country
 from ...models import Currency
 from ...models import Ledger
 from ...models import Entity
@@ -62,41 +61,6 @@ class Command(BaseCommand):
 
    if options['debug']:
       progress.finish()
-
-
-  def _handle_country(self, mfMan, options):
-
-   total=mfMan.countryCount()
-   logger.debug("Django import countries: %s"%total)
-      
-   if options['debug']:
-      counter = 0
-      progress = progressbar.ProgressBar(maxval=total).start()
-
-   for countryMf in mfMan.countryList():
-     if options['debug']:
-        counter+=1
-        if counter % 100 == 0:
-            # logger.debug("%s / %s"%(counter,total))
-            progress.update(counter)
-  
-       # get/create entity/row/case
-       
-        countryDj, created = Country.objects.update_or_create(
-            country=countryMf['Ctry_Code'],
-          defaults={
-            'name': countryMf['Ctry_Desc1'],
-            
-          }
-        )
-        if created:
-            logger.debug("Created country %s / %s: %s"%(counter, total, countryDj))
-
-   if options['debug']:
-      progress.finish()
-
-
-
 
 
   def _handle_currency(self, mfMan, options):
@@ -204,7 +168,6 @@ class Command(BaseCommand):
 
     with MfManager(host=options['host'], port=options['port'], user=options['user'], password=options['password'], db=options['db']) as mfMan:  
       self._handle_superid(mfMan, options)
-      #self._handle_country(mfMan, options)
      # self._handle_currency(mfMan, options)
     #  self._handle_ledger(mfMan, options)
       #self._handle_entity(mfMan, options)

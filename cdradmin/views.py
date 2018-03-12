@@ -44,7 +44,8 @@ class IndexView( generic.ListView):
             "loan_type": x.loan_type.short_description,
             "loan_amount": x.loan_amount,
             "remaining_period":  x.get_remaining_period(),
-            "country_of_utilization": x.country_of_utilization.name,
+            "country_of_utilization": x.country_of_utilization.cdr_code,
+
 
           } for x in SuperidToLoanLiability.objects.all()
         ]
