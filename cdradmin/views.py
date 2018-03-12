@@ -48,9 +48,6 @@ class IndexView( generic.ListView):
             "loan_type": x.loan_type.short_description,
             "loan_amount": x.loan_amount,
 
-            #"guarantee_type": x.guarantee_type,
-            #"guarantee_amount": x.guarantee_amount,
-            #"guarantee_currency": x.guarantee_currency.name if x.guarantee_currency is not None else None,
           } for x in SuperidToLoanLiability.objects.all()
         ]
         return JsonResponse(json_obj ,safe=False)

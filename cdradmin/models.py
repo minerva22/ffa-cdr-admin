@@ -112,12 +112,6 @@ class SuperidToLoanLiability(models.Model):
      loan_amount = models.IntegerField(default=0)
      liability_type = models.ForeignKey(Liability)
 
-     #: deprecated
-     guarantee_amount = models.IntegerField(default=0)
-
-     #: deprecated
-     guarantee_type = models.CharField(max_length=255, blank=True)
-
      #: Instead of setting "guarantee_..." fields which are now deprecated,
      #: just point a liability to another one as the guarantee for which it is
      guarantee_for = models.ForeignKey('SuperidToLoanLiability', blank=True, null=True, default=None)
@@ -128,8 +122,6 @@ class SuperidToLoanLiability(models.Model):
 
      country_of_utilization= models.ForeignKey(Country,blank=True, null=True)
      currency_liability = models.ForeignKey(Currency,blank=True, null=True, related_name='currency_liability')
-     #: deprecated
-     guarantee_currency = models.ForeignKey(Currency,blank=True, null=True,related_name='guarantee_currency')
 
      closed = models.BooleanField(default=False)     
  
@@ -159,8 +151,8 @@ class SuperidToLoanLiability(models.Model):
         ordering = ['superid__superid', 'ledger__ledger', 'subledger', 'currency_liability']
 
      def __str__(self):
-       # return "%s: %s,%s,%s, %s,%s,%s, %s, %s"%(self.superid, self.loan_type, self.liability_type, self.guarantee_amount, self.maturity_date, self.country_of_utilization,self.ledger,self.closed)
-         return "%s: %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s"%(self.superid, self.loan_type,self.loan_amount, self.liability_type, self.guarantee_amount,self.guarantee_type,self.ledger, self.maturity_date,self.country_of_utilization,self.currency_liability,self.guarantee_currency,self.closed)
+       # return "%s: %s,%s,%s, %s,%s,%s, %s, %s"%(self.superid, self.loan_type, self.liability_type, self.maturity_date, self.country_of_utilization,self.ledger,self.closed)
+         return "%s: %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s"%(self.superid, self.loan_type,self.loan_amount, self.liability_type, self.ledger, self.maturity_date,self.country_of_utilization,self.currency_liability,self.closed)
 
 
      def save(self,*args, **kwargs):
