@@ -23,18 +23,17 @@ class Liability(models.Model):
 
 
 class Superid(models.Model):
-     
      superid = models.IntegerField(default=0)
+     account = models.CharField(max_length=6)
      name = models.CharField(max_length=255)
-   
+  
      class Meta:
-          unique_together = ("superid", "name")  
-          
-
+          unique_together = ("superid", "account")  
 
      def __str__(self):
         #return str(self.superid)+": "+self.name
-        return "%s: %s"%(self.superid, self.name) 
+        return "%s/%s: %s"%(self.superid, self.account, self.name) 
+
 
 class Partner_type(models.Model):
        code = models.IntegerField(default=0)

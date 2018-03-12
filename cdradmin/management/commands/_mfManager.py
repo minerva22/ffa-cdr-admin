@@ -28,7 +28,7 @@ class MfManager:
       SELECT
         count(*) as n
       FROM CLIENT
-
+      where CLI_TTU_COD=1
     """)
     res = cursor.fetchall()
     return res[0]['n']
@@ -36,9 +36,9 @@ class MfManager:
   def superidsList(self):
     cursor = self._execute("""
 
-      SELECT CLI_SUPERID, CLI_NOM_PRE       
+      SELECT CLI_SUPERID, CLI_COD, CLI_NOM_PRE       
       FROM CLIENT
-      
+      where CLI_TTU_COD=1
       order by cli_superid asc
     """)
     return cursor

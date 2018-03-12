@@ -52,9 +52,9 @@ class Command(BaseCommand):
         # get/create entity/row/case
         superidDj, created = Superid.objects.update_or_create(
           superid=superidMf['CLI_SUPERID'],
+          account=superidMf['CLI_COD'],
           defaults={
             'name': superidMf['CLI_NOM_PRE'],
-
           }
         )
         if created:
@@ -203,8 +203,8 @@ class Command(BaseCommand):
       logger.setLevel(logging.DEBUG)
 
     with MfManager(host=options['host'], port=options['port'], user=options['user'], password=options['password'], db=options['db']) as mfMan:  
-      #self._handle_superid(mfMan, options)
+      self._handle_superid(mfMan, options)
       #self._handle_country(mfMan, options)
      # self._handle_currency(mfMan, options)
     #  self._handle_ledger(mfMan, options)
-      self._handle_entity(mfMan, options)
+      #self._handle_entity(mfMan, options)
