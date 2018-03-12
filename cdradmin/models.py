@@ -104,6 +104,12 @@ class Ledger(models.Model):
 
 
 from django.core.exceptions import ValidationError 
+
+def diff_month(d1, d2):
+    return (d1.year - d2.year) * 12 + d1.month - d2.month
+
+import datetime as dt
+
 class SuperidToLoanLiability(models.Model):
      
      superid = models.ForeignKey(Superid)
@@ -177,3 +183,6 @@ class SuperidToLoanLiability(models.Model):
          return "-"
        return self.ledger.ledger
 
+     def get_remaining_period(self):
+       if self.maturity_date is None: return 0
+       return diff_month(self.maturity_date, dt.datetime.now())

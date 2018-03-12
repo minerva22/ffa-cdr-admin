@@ -78,7 +78,7 @@
   <th>Liability type</th>
   <th>Loan amount</th>
 
-  <th>Maturity Date</th>
+  <th>Maturity Date (remaining months)</th>
   <th>Country of utilization</th>
   <th>Guarantee for</th>
   <th>Closed</th>
@@ -96,7 +96,11 @@
   <td title="{{x.liability_type.long_description}}">{{x.liability_type.short_description}}</td>
   <td>{{x.loan_amount|intcomma}}</td>
 
-  <td>{{x.maturity_date|date:"Y-m-d"}}</td>
+  <td {% if x.get_remaining_period < 0 %}style="color:red"{% endif %}>
+    {% if x.maturity_date %}
+    {{x.maturity_date|date:"Y-m-d"}} ({{x.get_remaining_period}} months)
+    {% endif %}
+  </td>
   <td>{{x.country_of_utilization}}</td>
   <td nowrap>
     {% if x.guarantee_for %}
