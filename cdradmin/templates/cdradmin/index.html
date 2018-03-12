@@ -89,7 +89,7 @@
 {% for x in object_list %}
 <tr {% if x.closed %} bgcolor="grey" {% endif %}>
   <td>{{x.superid}}</td>
-  <td title="{{x.ledger.name}}">{{x.ledger.ledger}}</td>
+  <td title="{{x.display_ledger_title}}">{{x.display_ledger_text}}</td>
   <td>{{x.subledger}}</td>
   <td>{{x.currency_liability.name}}</td>
 

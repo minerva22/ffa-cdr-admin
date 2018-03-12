@@ -103,7 +103,7 @@ class Ledger(models.Model):
    
 
 
- 
+from django.core.exceptions import ValidationError 
 class SuperidToLoanLiability(models.Model):
      
      superid = models.ForeignKey(Superid)
@@ -120,10 +120,10 @@ class SuperidToLoanLiability(models.Model):
 
      #: Instead of setting "guarantee_..." fields which are now deprecated,
      #: just point a liability to another one as the guarantee for which it is
-     guarantee_for = models.ForeignKey('SuperidToLoanLiability', null=True, default=None)
+     guarantee_for = models.ForeignKey('SuperidToLoanLiability', blank=True, null=True, default=None)
 
      maturity_date = models.DateField(blank=True,null=True)
-     ledger = models.ForeignKey(Ledger)
+     ledger = models.ForeignKey(Ledger, blank=True, null=True, default=None)
      subledger = models.IntegerField(default=0, validators = [MinValueValidator(0), MaxValueValidator(9)])
 
      country_of_utilization= models.ForeignKey(Country,blank=True, null=True)
@@ -142,6 +142,16 @@ class SuperidToLoanLiability(models.Model):
      # ledger = forms.CharField(required=False, blank=True, null=True)
     #  country_of_utilization = forms.CharField(required=False, blank=True, null=True)
       
+
+     def clean(self,*args, **kwargs):
+       if self.liability_type.short_description in ['TSR','TBI']:
+         if self.ledger is not None:
+           raise ValidationError("Cannot set ledger for TSR/TBI")
+       else:
+         if self.ledger is None:
+           raise ValidationError("Ledger is required for all liability types *other* than TSR/TBI")
+       return super().clean(*args, **kwargs)
+
      class Meta:
         unique_together = (
           ('superid', 'ledger', 'subledger', 'currency_liability'),
@@ -159,3 +169,14 @@ class SuperidToLoanLiability(models.Model):
          self.country_of_utilization = lebanon
 
        return super().save(*args, **kwargs)
+
+     def display_ledger_title(self):
+       if self.liability_type.short_description in ['TSR','TBI']:
+         return "N/A since %s"%self.liability_type.short_description
+       return self.ledger.name
+
+     def display_ledger_text(self):
+       if self.liability_type.short_description in ['TSR','TBI']:
+         return "-"
+       return self.ledger.ledger
+
