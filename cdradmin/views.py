@@ -39,6 +39,7 @@ class IndexView( generic.ListView):
         json_obj = [
           {
             "superid": x.superid.superid,
+            "account": x.superid.account,
             "ledger": x.ledger.ledger if x.ledger is not None else None,
             "subledger": x.subledger,
             "currency": x.currency_liability.name if x.currency_liability is not None else None,
