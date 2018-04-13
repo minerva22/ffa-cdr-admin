@@ -63,7 +63,9 @@ class EntityToPartnerType(models.Model):
           return "%s: %s"%(self.entity, self.partner_type)
 
 class Currency(models.Model):
+      #: numeric code in MF
       code = models.IntegerField(default=0)
+
       name = models.CharField(max_length=255)
       description = models.CharField(max_length=255)
 
@@ -77,8 +79,8 @@ class Currency(models.Model):
 
 
 class Country(models.Model):
-     cdr_code = models.IntegerField(default=0)
-     name = models.CharField(max_length=255)
+     cdr_code = models.IntegerField(default=0, unique=True)
+     name = models.CharField(max_length=255, unique=True)
      class Meta:
        ordering = ('name',)
      
@@ -141,6 +143,11 @@ class SuperidToLoanLiability(models.Model):
        else:
          if self.ledger is None:
            raise ValidationError("Ledger is required for all liability types *other* than TSR/TBI")
+
+       if self.guarantee_for is not None:
+         if self.currency_liability != self.guarantee_for.currency_liability:
+           raise ValidationError({"guarantee_for": "Liability currency is '%s', but currency of 'guarantee for' is '%s'. Please use the same currency for both, or convert one of them to the other one's currency."%(self.currency_liability.name, self.guarantee_for.currency_liability.name)})
+
        return super().clean(*args, **kwargs)
 
      class Meta:
@@ -150,11 +157,11 @@ class SuperidToLoanLiability(models.Model):
         ordering = ['superid__superid', 'ledger__ledger', 'subledger', 'currency_liability']
 
      def __str__(self):
-         return "%s: %s, %s, %s"%(self.superid, self.display_ledger_text(), self.subledger, self.currency_liability)
+         return "%s: %s, %s, %s, %s, %s"%(self.superid, self.display_ledger_text(), self.subledger, self.currency_liability, self.loan_type.short_description, self.liability_type.short_description)
 
 
      def save(self,*args, **kwargs):
-       beirut = Country.objects.get(name__iexact='beirut')
+       beirut = Country.objects.get_or_create(cdr_code=101, name='beirut')
        if self.country_of_utilization is None:
          self.country_of_utilization = beirut
 

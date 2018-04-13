@@ -62,3 +62,43 @@ class CurrencyTestCase(TestCase):
              url = reverse('cdradmin:index')
              response = self.client.get(url)
              self.assertEqual(response.status_code, 200)
+
+
+
+from django.core.exceptions import ValidationError
+
+class SuperidToLoanLiabilityModelTest(TestCase):
+    def test_currency_different_than_guarantee_for(self):
+      superid = Superid.objects.create(superid='22222', name='vivaa')
+      loan_type = Loan.objects.create(short_description='z222', long_description='cesttt un test')
+      ledger = Ledger.objects.create(ledger='0001',name='testt')
+      country = Country.objects.create(cdr_code='00',name='testt')
+      c_ash = Currency.objects.create(code=13,name='LBP',description='testtt')
+      c_tbi = Currency.objects.create(code=2, name='USD',description='testtt')
+      l_ash = Liability.objects.create(short_description='ASH', long_description='cest un testtt')
+      l_tbi = Liability.objects.create(short_description='TBI', long_description='cest un testtt')
+
+      s_ash=SuperidToLoanLiability.objects.create(
+        superid = superid,
+        loan_type = loan_type,
+        liability_type = l_ash,
+        guarantee_for = None,
+        ledger = ledger,
+        country_of_utilization = country,
+        currency_liability = c_ash,
+        closed= False
+      )
+
+      s_tbi=SuperidToLoanLiability.objects.create(
+        superid = superid,
+        loan_type = loan_type,
+        liability_type = l_tbi,
+        guarantee_for = s_ash,
+        ledger = None,
+        country_of_utilization = country,
+        currency_liability = c_tbi,
+        closed= False
+      )
+      with self.assertRaises(ValidationError):
+        s_tbi.full_clean()
+
