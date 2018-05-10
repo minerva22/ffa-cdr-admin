@@ -161,7 +161,8 @@ class SuperidToLoanLiability(models.Model):
 
 
      def save(self,*args, **kwargs):
-       beirut = Country.objects.get_or_create(cdr_code=101, name='beirut')
+       # use "iexact" below for case insensitive matching
+       beirut = Country.objects.get_or_create(cdr_code=101, name__iexact='beirut')
        if self.country_of_utilization is None:
          self.country_of_utilization = beirut
 
