@@ -179,5 +179,8 @@ class SuperidToLoanLiability(models.Model):
        return self.ledger.ledger
 
      def get_remaining_period(self):
-       if self.maturity_date is None: return 0
+       if (self.maturity_date is None)  : return 0
+       else:
+           if not diff_month(self.maturity_date, dt.datetime.now())>0: return 0
+       
        return diff_month(self.maturity_date, dt.datetime.now())
